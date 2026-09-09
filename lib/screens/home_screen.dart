@@ -138,7 +138,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.white)),
                         iconTheme: const IconThemeData(color: _accent),
                       ),
-                    SliverToBoxAdapter(child: SizedBox(key: _keys[0], child: const _HeroSection())),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        key: _keys[0],
+                        child: _HeroSection(
+                          onViewProjects: () => _scrollTo(4),
+                        ),
+                      ),
+                    ),
                     SliverToBoxAdapter(child: SizedBox(key: _keys[1], child: const _AboutSection())),
                     SliverToBoxAdapter(child: SizedBox(key: _keys[2], child: const _SkillsSection())),
                     SliverToBoxAdapter(child: SizedBox(key: _keys[3], child: const _ResumeSection())),
@@ -352,7 +359,8 @@ class _SocialBtnState extends State<_SocialBtn> {
 
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 class _HeroSection extends StatelessWidget {
-  const _HeroSection();
+  final VoidCallback? onViewProjects;
+  const _HeroSection({this.onViewProjects});
 
   @override
   Widget build(BuildContext context) {
@@ -384,8 +392,8 @@ class _HeroSection extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: isDesktop
-                  ? _HeroText()
-                  : _HeroText(centered: true),
+                  ? _HeroText(onViewProjects: onViewProjects)
+                  : _HeroText(centered: true, onViewProjects: onViewProjects),
             ),
           ),
 
@@ -410,7 +418,8 @@ class _HeroSection extends StatelessWidget {
 
 class _HeroText extends StatelessWidget {
   final bool centered;
-  const _HeroText({this.centered = false});
+  final VoidCallback? onViewProjects;
+  const _HeroText({this.centered = false, this.onViewProjects});
 
   @override
   Widget build(BuildContext context) {
@@ -517,7 +526,7 @@ class _HeroText extends StatelessWidget {
             _GradientButton(
               label: 'View Projects',
               icon: Icons.apps_rounded,
-              onPressed: () => launchUrl(Uri.parse('#projects')),
+              onPressed: onViewProjects ?? () {},
             ),
             _OutlineButton(
               label: 'Download CV',
@@ -1411,22 +1420,22 @@ class _ProjectCardState extends State<_ProjectCard> {
                       children: [
                         Expanded(
                           child: _SmallGradientBtn(
-                            label: 'Try Now',
-                            icon: Icons.play_arrow_rounded,
-                            onTap: () => widget.onTryNow(p),
+                            label: 'View Details',
+                            icon: Icons.arrow_forward_rounded,
+                            onTap: () => Navigator.pushNamed(context, '/project/${p.id}'),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        _IconOutlineBtn(
-                          icon: Icons.open_in_new_rounded,
-                          tooltip: 'View Details',
-                          onTap: () => Navigator.pushNamed(context, '/project/${p.id}'),
                         ),
                         const SizedBox(width: 8),
                         _IconOutlineBtn(
                           icon: Icons.download_rounded,
                           tooltip: 'Download APK',
                           onTap: () => html.window.open(p.apkUrl, '_blank'),
+                        ),
+                        const SizedBox(width: 8),
+                        _IconOutlineBtn(
+                          icon: Icons.code_rounded,
+                          tooltip: 'View GitHub Code',
+                          onTap: () => launchUrl(Uri.parse(p.githubUrl)),
                         ),
                       ],
                     ),

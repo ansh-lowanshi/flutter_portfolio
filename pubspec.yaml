@@ -1,0 +1,40 @@
+name: flutter_portfolio
+description: "Ansh Lowanshi's Flutter Developer Portfolio"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  url_launcher: ^6.3.1
+  google_fonts: ^6.2.1
+  font_awesome_flutter: ^11.0.0
+  animated_text_kit: ^4.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/img/
+    - assets/img/wizpr/
+    - assets/img/WizPlayer/
+    - assets/img/aichatbot/
+    - assets/img/ffms/
+    - assets/img/mini-e-commerce/
+    - assets/img/movie_search/
+    - assets/img/taskBucket/
+    - assets/img/tic-tac-toe/
+    - assets/img/portfolio/
+    - assets/resume/

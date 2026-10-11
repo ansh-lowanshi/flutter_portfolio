@@ -41,8 +41,9 @@ final List<Project> myProjects = [
         'image sharing, and a beautiful dark-themed interface designed for modern users.',
     imageUrl: 'assets/img/wizpr/5.jpg',
     webUrl: 'https://wizpr-chat.web.app/',
-    apkUrl: 'https://drive.google.com/file/d/1ZfmtFh0dzqeIC0gaJQ2g8EFqyU7P2Bht/view?usp=sharing',
-    githubUrl: 'https://github.com/ansh-lowanshi/wizpr',
+    apkUrl:
+        'https://drive.google.com/file/d/1ZfmtFh0dzqeIC0gaJQ2g8EFqyU7P2Bht/view?usp=sharing',
+    githubUrl: 'https://github.com/ansh-lowanshi/cahtApp-wizpr',
     techStack: ['Flutter', 'Firebase', 'Firestore', 'Auth', 'Dart'],
     screenshots: [
       'assets/img/wizpr/1.jpg',
@@ -69,9 +70,10 @@ final List<Project> myProjects = [
         'for background playback and lock-screen controls.',
     imageUrl:
         'assets/img/WizPlayer/Screenshot_2026-08-24-22-22-25-303_com.example.wiz_player.jpg',
-    webUrl: 'https://wiz-player.web.app/',
-    apkUrl: 'https://drive.google.com/file/d/1om4uwDpuKfVVZhN4yKq7uEtk68M-Oh8p/view?usp=sharing',
-    githubUrl: 'https://github.com/ansh-lowanshi/wiz-player',
+    webUrl: 'https://wiz_player.web.app/',
+    apkUrl:
+        'https://drive.google.com/file/d/1om4uwDpuKfVVZhN4yKq7uEtk68M-Oh8p/view?usp=sharing',
+    githubUrl: 'https://github.com/ansh-lowanshi/wiz_player',
     techStack: ['Flutter', 'Dart', 'JioSaavn API', 'just_audio', 'Hive'],
     screenshots: [
       'assets/img/WizPlayer/Screenshot_2026-08-24-22-22-25-303_com.example.wiz_player.jpg',
@@ -98,8 +100,9 @@ final List<Project> myProjects = [
         'chat interface that feels natural and responsive.',
     imageUrl: 'assets/img/aichatbot/4.jpg',
     webUrl: 'https://ai-chatbot-ansh.web.app/',
-    apkUrl: 'https://drive.google.com/drive/folders/1YRgyHFKOI1T9IvNoe3igkMc8j8z4fy1k?usp=sharing',
-    githubUrl: 'https://github.com/ansh-lowanshi/ai-chatbot',
+    apkUrl:
+        'https://drive.google.com/drive/folders/1YRgyHFKOI1T9IvNoe3igkMc8j8z4fy1k?usp=sharing',
+    githubUrl: 'https://github.com/ansh-lowanshi/Ai-ChatBot',
     techStack: ['Flutter', 'Gemini AI', 'Dart', 'Google AI SDK'],
     screenshots: [
       'assets/img/aichatbot/1.jpg',
@@ -124,8 +127,9 @@ final List<Project> myProjects = [
         'it handles complex business logic while maintaining a clean, intuitive UI.',
     imageUrl: 'assets/img/ffms/1.jpg',
     webUrl: 'https://ffms-system.web.app/',
-    apkUrl: 'https://drive.google.com/drive/folders/1YRgyHFKOI1T9IvNoe3igkMc8j8z4fy1k?usp=sharing',
-    githubUrl: 'https://github.com/ansh-lowanshi/ffms',
+    apkUrl:
+        'https://drive.google.com/drive/folders/1YRgyHFKOI1T9IvNoe3igkMc8j8z4fy1k?usp=sharing',
+    githubUrl: '',
     techStack: ['Flutter', 'Riverpod', 'REST APIs', 'Maps', 'Dart'],
     screenshots: [
       'assets/img/ffms/1.jpg',
@@ -151,8 +155,9 @@ final List<Project> myProjects = [
         'and implements a clean architecture pattern.',
     imageUrl: 'assets/img/movie_search/1.jpg',
     webUrl: 'https://movie-basket.web.app/',
-    apkUrl: 'https://drive.google.com/file/d/1zzbjLkzdSadUSJS9h6Ia7RoVh0RGufII/view?usp=sharing',
-    githubUrl: 'https://github.com/ansh-lowanshi/movie-basket',
+    apkUrl:
+        'https://drive.google.com/file/d/1zzbjLkzdSadUSJS9h6Ia7RoVh0RGufII/view?usp=sharing',
+    githubUrl: 'https://github.com/ansh-lowanshi/MovieBasket',
     techStack: ['Flutter', 'TMDB API', 'GetX', 'Dart', 'REST API'],
     screenshots: [
       'assets/img/movie_search/1.jpg',
@@ -174,8 +179,9 @@ final List<Project> myProjects = [
         'with a clean, modern look that prioritizes usability and conversion.',
     imageUrl: 'assets/img/mini-e-commerce/1.jpg',
     webUrl: 'https://mini-ecommerce-ansh.web.app/',
-    apkUrl: 'https://drive.google.com/file/d/1bshH3fWS3uoqCg5RiOuHwreK-Qv8gl0h/view?usp=sharing',
-    githubUrl: 'https://github.com/ansh-lowanshi/mini-ecommerce',
+    apkUrl:
+        'https://drive.google.com/file/d/1bshH3fWS3uoqCg5RiOuHwreK-Qv8gl0h/view?usp=sharing',
+    githubUrl: 'https://github.com/ansh-lowanshi/mini_shopping_app',
     techStack: ['Flutter', 'Provider', 'Dart', 'REST API'],
     screenshots: [
       'assets/img/mini-e-commerce/1.jpg',

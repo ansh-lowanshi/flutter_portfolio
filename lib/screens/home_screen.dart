@@ -32,8 +32,7 @@ class PortfolioApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: _accent,
         scaffoldBackgroundColor: _bg,
-        textTheme:
-            GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
         colorScheme: const ColorScheme.dark(
           primary: _accent,
           secondary: _accentAlt,
@@ -70,7 +69,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _scrollController = ScrollController();
   final List<GlobalKey> _keys = List.generate(6, (_) => GlobalKey());
-  final _sectionNames = ['Home', 'About', 'Skills', 'Resume', 'Projects', 'Contact'];
+  final _sectionNames = [
+    'Home',
+    'About',
+    'Skills',
+    'Resume',
+    'Projects',
+    'Contact',
+  ];
   int _activeSection = 0;
   Project? _selectedProject;
 
@@ -104,8 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void _scrollTo(int i) {
     final ctx = _keys[i].currentContext;
     if (ctx == null) return;
-    Scrollable.ensureVisible(ctx,
-        duration: const Duration(milliseconds: 700), curve: Curves.easeInOut);
+    Scrollable.ensureVisible(
+      ctx,
+      duration: const Duration(milliseconds: 700),
+      curve: Curves.easeInOut,
+    );
     if (MediaQuery.of(context).size.width < 1000) Navigator.pop(context);
     setState(() => _activeSection = i);
   }
@@ -116,7 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: _bg,
-      drawer: isDesktop ? null : Drawer(child: _Sidebar(active: _activeSection, onTap: _scrollTo)),
+      drawer: isDesktop
+          ? null
+          : Drawer(
+              child: _Sidebar(active: _activeSection, onTap: _scrollTo),
+            ),
       body: Stack(
         children: [
           Row(
@@ -134,21 +147,39 @@ class _HomeScreenState extends State<HomeScreen> {
                       SliverAppBar(
                         floating: true,
                         backgroundColor: _sidebar,
-                        title: Text('Ansh Lowanshi',
-                            style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.white)),
+                        title: Text(
+                          'Ansh Lowanshi',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                         iconTheme: const IconThemeData(color: _accent),
                       ),
                     SliverToBoxAdapter(
                       child: SizedBox(
                         key: _keys[0],
-                        child: _HeroSection(
-                          onViewProjects: () => _scrollTo(4),
-                        ),
+                        child: _HeroSection(onViewProjects: () => _scrollTo(4)),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(key: _keys[1], child: const _AboutSection())),
-                    SliverToBoxAdapter(child: SizedBox(key: _keys[2], child: const _SkillsSection())),
-                    SliverToBoxAdapter(child: SizedBox(key: _keys[3], child: const _ResumeSection())),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        key: _keys[1],
+                        child: const _AboutSection(),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        key: _keys[2],
+                        child: const _SkillsSection(),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        key: _keys[3],
+                        child: const _ResumeSection(),
+                      ),
+                    ),
                     SliverToBoxAdapter(
                       child: SizedBox(
                         key: _keys[4],
@@ -157,7 +188,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(child: SizedBox(key: _keys[5], child: const _ContactSection())),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        key: _keys[5],
+                        child: const _ContactSection(),
+                      ),
+                    ),
                     const SliverToBoxAdapter(child: _Footer()),
                   ],
                 ),
@@ -189,7 +225,14 @@ class _Sidebar extends StatelessWidget {
     Icons.apps_outlined,
     Icons.mail_outline,
   ];
-  static const _names = ['Home', 'About', 'Skills', 'Resume', 'Projects', 'Contact'];
+  static const _names = [
+    'Home',
+    'About',
+    'Skills',
+    'Resume',
+    'Projects',
+    'Contact',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +248,13 @@ class _Sidebar extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              boxShadow: [BoxShadow(color: _accent.withValues(alpha: 0.35), blurRadius: 24, spreadRadius: 2)],
+              boxShadow: [
+                BoxShadow(
+                  color: _accent.withValues(alpha: 0.35),
+                  blurRadius: 24,
+                  spreadRadius: 2,
+                ),
+              ],
             ),
             child: CircleAvatar(
               radius: 56,
@@ -216,32 +265,49 @@ class _Sidebar extends StatelessWidget {
                   width: 108,
                   height: 108,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Icon(Icons.person, size: 50, color: _accent),
+                  errorBuilder: (_, __, ___) =>
+                      const Icon(Icons.person, size: 50, color: _accent),
                 ),
               ),
             ),
           ),
           const SizedBox(height: 16),
-          Text('Ansh Lowanshi',
-              style: GoogleFonts.poppins(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+          Text(
+            'Ansh Lowanshi',
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
           const SizedBox(height: 4),
           ShaderMask(
             shaderCallback: (bounds) => const LinearGradient(
               colors: [_accent, _accentAlt],
             ).createShader(bounds),
-            child: Text('Flutter Developer',
-                style: GoogleFonts.poppins(fontSize: 13, color: Colors.white)),
+            child: Text(
+              'Flutter Developer',
+              style: GoogleFonts.poppins(fontSize: 13, color: Colors.white),
+            ),
           ),
           const SizedBox(height: 16),
           // Social icons
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _SocialBtn(icon: FontAwesomeIcons.github, url: 'https://github.com/ansh-lowanshi'),
-              _SocialBtn(icon: FontAwesomeIcons.linkedin, url: 'https://www.linkedin.com/in/ansh-lowanshi/'),
-              _SocialBtn(icon: FontAwesomeIcons.instagram, url: 'https://www.instagram.com/ansh_lowanshi/'),
-              _SocialBtn(icon: FontAwesomeIcons.envelope, url: 'mailto:lowanshiansh@gmail.com'),
+              _SocialBtn(
+                icon: FontAwesomeIcons.github,
+                url: 'https://github.com/ansh-lowanshi',
+              ),
+              _SocialBtn(
+                icon: FontAwesomeIcons.linkedin,
+                url: 'https://www.linkedin.com/in/ansh-lowanshi/',
+              ),
+              _SocialBtn(icon: FontAwesomeIcons.instagram, url: ''),
+              _SocialBtn(
+                icon: FontAwesomeIcons.envelope,
+                url: 'mailto:lowanshiansh@gmail.com',
+              ),
             ],
           ),
           const SizedBox(height: 24),
@@ -274,7 +340,12 @@ class _NavItem extends StatefulWidget {
   final String label;
   final bool isActive;
   final VoidCallback onTap;
-  const _NavItem({required this.icon, required this.label, required this.isActive, required this.onTap});
+  const _NavItem({
+    required this.icon,
+    required this.label,
+    required this.isActive,
+    required this.onTap,
+  });
 
   @override
   State<_NavItem> createState() => _NavItemState();
@@ -304,17 +375,32 @@ class _NavItemState extends State<_NavItem> {
           ),
           child: Row(
             children: [
-              Icon(widget.icon, size: 18, color: highlight ? _accent : Colors.grey),
+              Icon(
+                widget.icon,
+                size: 18,
+                color: highlight ? _accent : Colors.grey,
+              ),
               const SizedBox(width: 12),
-              Text(widget.label,
-                  style: TextStyle(
-                    color: highlight ? _accent : Colors.grey,
-                    fontWeight: widget.isActive ? FontWeight.bold : FontWeight.normal,
-                    fontSize: 14,
-                  )),
+              Text(
+                widget.label,
+                style: TextStyle(
+                  color: highlight ? _accent : Colors.grey,
+                  fontWeight: widget.isActive
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                  fontSize: 14,
+                ),
+              ),
               if (widget.isActive) ...[
                 const Spacer(),
-                Container(width: 6, height: 6, decoration: const BoxDecoration(color: _accent, shape: BoxShape.circle)),
+                Container(
+                  width: 6,
+                  height: 6,
+                  decoration: const BoxDecoration(
+                    color: _accent,
+                    shape: BoxShape.circle,
+                  ),
+                ),
               ],
             ],
           ),
@@ -350,7 +436,11 @@ class _SocialBtnState extends State<_SocialBtn> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: _hovered ? _accent : Colors.transparent),
           ),
-          child: FaIcon(widget.icon, size: 16, color: _hovered ? _accent : Colors.grey),
+          child: FaIcon(
+            widget.icon,
+            size: 16,
+            color: _hovered ? _accent : Colors.grey,
+          ),
         ),
       ),
     );
@@ -380,9 +470,24 @@ class _HeroSection extends StatelessWidget {
       child: Stack(
         children: [
           // Decorative glowing orbs
-          Positioned(top: h * 0.15, right: w * 0.1, child: _GlowOrb(size: 300, color: _accent.withValues(alpha: 0.08))),
-          Positioned(bottom: h * 0.2, left: w * 0.05, child: _GlowOrb(size: 200, color: _accentAlt.withValues(alpha: 0.07))),
-          Positioned(top: h * 0.5, right: w * 0.3, child: _GlowOrb(size: 150, color: _accent.withValues(alpha: 0.05))),
+          Positioned(
+            top: h * 0.15,
+            right: w * 0.1,
+            child: _GlowOrb(size: 300, color: _accent.withValues(alpha: 0.08)),
+          ),
+          Positioned(
+            bottom: h * 0.2,
+            left: w * 0.05,
+            child: _GlowOrb(
+              size: 200,
+              color: _accentAlt.withValues(alpha: 0.07),
+            ),
+          ),
+          Positioned(
+            top: h * 0.5,
+            right: w * 0.3,
+            child: _GlowOrb(size: 150, color: _accent.withValues(alpha: 0.05)),
+          ),
 
           // Grid pattern overlay
           CustomPaint(size: Size(w, h), painter: _GridPainter()),
@@ -404,7 +509,13 @@ class _HeroSection extends StatelessWidget {
             right: 0,
             child: Column(
               children: [
-                Text('Scroll Down', style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 12)),
+                Text(
+                  'Scroll Down',
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.4),
+                    fontSize: 12,
+                  ),
+                ),
                 const SizedBox(height: 8),
                 const _ScrollIndicator(),
               ],
@@ -424,7 +535,9 @@ class _HeroText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final align = centered ? TextAlign.center : TextAlign.left;
-    final cross = centered ? CrossAxisAlignment.center : CrossAxisAlignment.start;
+    final cross = centered
+        ? CrossAxisAlignment.center
+        : CrossAxisAlignment.start;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -441,9 +554,23 @@ class _HeroText extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(width: 8, height: 8, decoration: const BoxDecoration(color: _accent, shape: BoxShape.circle)),
+              Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(
+                  color: _accent,
+                  shape: BoxShape.circle,
+                ),
+              ),
               const SizedBox(width: 8),
-              Text('Available for freelance', style: TextStyle(color: _accent, fontSize: 12, fontWeight: FontWeight.w500)),
+              Text(
+                'Available for freelance',
+                style: TextStyle(
+                  color: _accent,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ],
           ),
         ),
@@ -468,13 +595,22 @@ class _HeroText extends StatelessWidget {
         // Animated roles
         Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: centered ? MainAxisAlignment.center : MainAxisAlignment.start,
+          mainAxisAlignment: centered
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
           children: [
             ShaderMask(
               shaderCallback: (bounds) => const LinearGradient(
                 colors: [_accent, _accentAlt],
               ).createShader(bounds),
-              child: Text("I'm a ", style: GoogleFonts.poppins(fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500)),
+              child: Text(
+                "I'm a ",
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             AnimatedTextKit(
               repeatForever: true,
@@ -531,7 +667,8 @@ class _HeroText extends StatelessWidget {
             _OutlineButton(
               label: 'Download CV',
               icon: Icons.download_rounded,
-              onPressed: () => html.window.open('assets/resume/ANSH_LOWANSHI.pdf', '_blank'),
+              onPressed: () =>
+                  html.window.open('assets/resume/ANSH_LOWANSHI.pdf', '_blank'),
             ),
           ],
         ),
@@ -552,7 +689,9 @@ class _HeroAvatar extends StatelessWidget {
           height: 290,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: RadialGradient(colors: [_accent.withValues(alpha: 0.2), Colors.transparent]),
+            gradient: RadialGradient(
+              colors: [_accent.withValues(alpha: 0.2), Colors.transparent],
+            ),
           ),
         ),
         // Border ring
@@ -562,7 +701,13 @@ class _HeroAvatar extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: _accent.withValues(alpha: 0.5), width: 2),
-            boxShadow: [BoxShadow(color: _accent.withValues(alpha: 0.3), blurRadius: 30, spreadRadius: 5)],
+            boxShadow: [
+              BoxShadow(
+                color: _accent.withValues(alpha: 0.3),
+                blurRadius: 30,
+                spreadRadius: 5,
+              ),
+            ],
           ),
         ),
         // Actual image
@@ -590,14 +735,26 @@ class _HeroAvatar extends StatelessWidget {
               color: _card,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: _accent.withValues(alpha: 0.5)),
-              boxShadow: [BoxShadow(color: _accent.withValues(alpha: 0.3), blurRadius: 10)],
+              boxShadow: [
+                BoxShadow(
+                  color: _accent.withValues(alpha: 0.3),
+                  blurRadius: 10,
+                ),
+              ],
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Icon(Icons.flutter_dash, color: _accent, size: 18),
                 const SizedBox(width: 6),
-                Text('Flutter Dev', style: GoogleFonts.poppins(fontSize: 11, color: _accent, fontWeight: FontWeight.bold)),
+                Text(
+                  'Flutter Dev',
+                  style: GoogleFonts.poppins(
+                    fontSize: 11,
+                    color: _accent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),
@@ -638,6 +795,7 @@ class _GridPainter extends CustomPainter {
       canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }
   }
+
   @override
   bool shouldRepaint(_) => false;
 }
@@ -648,17 +806,26 @@ class _ScrollIndicator extends StatefulWidget {
   State<_ScrollIndicator> createState() => _ScrollIndicatorState();
 }
 
-class _ScrollIndicatorState extends State<_ScrollIndicator> with SingleTickerProviderStateMixin {
+class _ScrollIndicatorState extends State<_ScrollIndicator>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
   late final Animation<double> _anim;
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200))..repeat(reverse: true);
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
     _anim = Tween(begin: 0.0, end: 1.0).animate(_ctrl);
   }
+
   @override
-  void dispose() { _ctrl.dispose(); super.dispose(); }
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -667,7 +834,11 @@ class _ScrollIndicatorState extends State<_ScrollIndicator> with SingleTickerPro
         opacity: 0.3 + _anim.value * 0.7,
         child: Transform.translate(
           offset: Offset(0, _anim.value * 6),
-          child: const Icon(Icons.keyboard_arrow_down, color: _accent, size: 28),
+          child: const Icon(
+            Icons.keyboard_arrow_down,
+            color: _accent,
+            size: 28,
+          ),
         ),
       ),
     );
@@ -678,7 +849,11 @@ class _GradientButton extends StatefulWidget {
   final String label;
   final IconData icon;
   final VoidCallback onPressed;
-  const _GradientButton({required this.label, required this.icon, required this.onPressed});
+  const _GradientButton({
+    required this.label,
+    required this.icon,
+    required this.onPressed,
+  });
   @override
   State<_GradientButton> createState() => _GradientButtonState();
 }
@@ -702,9 +877,11 @@ class _GradientButtonState extends State<_GradientButton> {
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: (_hovered ? _accentAlt : _accent).withValues(alpha: _hovered ? 0.5 : 0.3),
+                color: (_hovered ? _accentAlt : _accent).withValues(
+                  alpha: _hovered ? 0.5 : 0.3,
+                ),
                 blurRadius: _hovered ? 20 : 10,
-              )
+              ),
             ],
           ),
           child: Row(
@@ -712,7 +889,13 @@ class _GradientButtonState extends State<_GradientButton> {
             children: [
               Icon(widget.icon, size: 18, color: Colors.white),
               const SizedBox(width: 8),
-              Text(widget.label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              Text(
+                widget.label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),
@@ -725,7 +908,11 @@ class _OutlineButton extends StatefulWidget {
   final String label;
   final IconData icon;
   final VoidCallback onPressed;
-  const _OutlineButton({required this.label, required this.icon, required this.onPressed});
+  const _OutlineButton({
+    required this.label,
+    required this.icon,
+    required this.onPressed,
+  });
   @override
   State<_OutlineButton> createState() => _OutlineButtonState();
 }
@@ -745,14 +932,27 @@ class _OutlineButtonState extends State<_OutlineButton> {
           decoration: BoxDecoration(
             color: _hovered ? _accentGlow : Colors.transparent,
             borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: _hovered ? _accent : Colors.white38, width: 1.5),
+            border: Border.all(
+              color: _hovered ? _accent : Colors.white38,
+              width: 1.5,
+            ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(widget.icon, size: 18, color: _hovered ? _accent : Colors.white70),
+              Icon(
+                widget.icon,
+                size: 18,
+                color: _hovered ? _accent : Colors.white70,
+              ),
               const SizedBox(width: 8),
-              Text(widget.label, style: TextStyle(color: _hovered ? _accent : Colors.white70, fontWeight: FontWeight.bold)),
+              Text(
+                widget.label,
+                style: TextStyle(
+                  color: _hovered ? _accent : Colors.white70,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),
@@ -793,9 +993,17 @@ class _AboutContent extends StatelessWidget {
       children: [
         // ── Intro ────────────────────────────────────────────────
         ShaderMask(
-          shaderCallback: (b) => const LinearGradient(colors: [_accent, _accentAlt]).createShader(b),
-          child: Text('Flutter Developer & Software Engineer',
-              style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+          shaderCallback: (b) => const LinearGradient(
+            colors: [_accent, _accentAlt],
+          ).createShader(b),
+          child: Text(
+            'Flutter Developer & Software Engineer',
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
         const SizedBox(height: 16),
         Text(
@@ -810,9 +1018,18 @@ class _AboutContent extends StatelessWidget {
           runSpacing: 12,
           children: [
             _InfoItem(icon: Icons.phone_outlined, label: '+91 7828479491'),
-            _InfoItem(icon: Icons.email_outlined, label: 'lowanshiansh@gmail.com'),
-            _InfoItem(icon: Icons.location_on_outlined, label: 'Bhopal, MP, India'),
-            _InfoItem(icon: Icons.school_outlined, label: 'B.Tech Computer Science'),
+            _InfoItem(
+              icon: Icons.email_outlined,
+              label: 'lowanshiansh@gmail.com',
+            ),
+            _InfoItem(
+              icon: Icons.location_on_outlined,
+              label: 'Mumbai, MH, India',
+            ),
+            _InfoItem(
+              icon: Icons.school_outlined,
+              label: 'B.Tech Computer Science',
+            ),
           ],
         ),
         const SizedBox(height: 20),
@@ -821,19 +1038,26 @@ class _AboutContent extends StatelessWidget {
             _GradientButton(
               label: 'View Resume',
               icon: Icons.open_in_new_rounded,
-              onPressed: () => html.window.open('assets/resume/ANSH_LOWANSHI.pdf', '_blank'),
+              onPressed: () =>
+                  html.window.open('assets/resume/ANSH_LOWANSHI.pdf', '_blank'),
             ),
             const SizedBox(width: 12),
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
                 onTap: () {
-                  final anchor = html.AnchorElement(href: 'assets/resume/ANSH_LOWANSHI.pdf')
-                    ..setAttribute('download', 'ANSH_LOWANSHI_Resume.pdf')
-                    ..click();
+                  final anchor =
+                      html.AnchorElement(
+                          href: 'assets/resume/ANSH_LOWANSHI.pdf',
+                        )
+                        ..setAttribute('download', 'ANSH_LOWANSHI_Resume.pdf')
+                        ..click();
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 13,
+                  ),
                   decoration: BoxDecoration(
                     color: _card,
                     borderRadius: BorderRadius.circular(12),
@@ -844,7 +1068,13 @@ class _AboutContent extends StatelessWidget {
                     children: [
                       Icon(Icons.download_rounded, color: _accent, size: 18),
                       SizedBox(width: 8),
-                      Text('Download', style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
+                      Text(
+                        'Download',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -868,11 +1098,17 @@ class _InfoItem extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(color: _accentGlow, borderRadius: BorderRadius.circular(6)),
+          decoration: BoxDecoration(
+            color: _accentGlow,
+            borderRadius: BorderRadius.circular(6),
+          ),
           child: Icon(icon, color: _accent, size: 16),
         ),
         const SizedBox(width: 8),
-        Text(label, style: const TextStyle(fontSize: 13, color: Colors.white70)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 13, color: Colors.white70),
+        ),
       ],
     );
   }
@@ -884,11 +1120,23 @@ class _StatsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _StatCard(number: '9+', label: 'Projects\nCompleted', icon: Icons.folder_outlined),
+        _StatCard(
+          number: '9+',
+          label: 'Projects\nCompleted',
+          icon: Icons.folder_outlined,
+        ),
         const SizedBox(width: 20),
-        _StatCard(number: '1', label: 'Internship\nCompleted', icon: Icons.work_outline),
+        _StatCard(
+          number: '1',
+          label: 'Internship\nCompleted',
+          icon: Icons.work_outline,
+        ),
         const SizedBox(width: 20),
-        _StatCard(number: '5+', label: 'Clubs &\nActivities', icon: Icons.group_outlined),
+        _StatCard(
+          number: '5+',
+          label: 'Clubs &\nActivities',
+          icon: Icons.group_outlined,
+        ),
       ],
     );
   }
@@ -897,7 +1145,11 @@ class _StatsRow extends StatelessWidget {
 class _StatCard extends StatefulWidget {
   final String number, label;
   final IconData icon;
-  const _StatCard({required this.number, required this.label, required this.icon});
+  const _StatCard({
+    required this.number,
+    required this.label,
+    required this.icon,
+  });
   @override
   State<_StatCard> createState() => _StatCardState();
 }
@@ -916,19 +1168,38 @@ class _StatCardState extends State<_StatCard> {
           color: _hovered ? _card : _card.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: _hovered ? _accent : _cardBorder),
-          boxShadow: _hovered ? [BoxShadow(color: _accent.withValues(alpha: 0.2), blurRadius: 20)] : [],
+          boxShadow: _hovered
+              ? [
+                  BoxShadow(
+                    color: _accent.withValues(alpha: 0.2),
+                    blurRadius: 20,
+                  ),
+                ]
+              : [],
         ),
         child: Column(
           children: [
             Icon(widget.icon, color: _accent, size: 28),
             const SizedBox(height: 12),
             ShaderMask(
-              shaderCallback: (b) => const LinearGradient(colors: [_accent, _accentAlt]).createShader(b),
-              child: Text(widget.number,
-                  style: GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
+              shaderCallback: (b) => const LinearGradient(
+                colors: [_accent, _accentAlt],
+              ).createShader(b),
+              child: Text(
+                widget.number,
+                style: GoogleFonts.poppins(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
             const SizedBox(height: 4),
-            Text(widget.label, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+            Text(
+              widget.label,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey[500], fontSize: 12),
+            ),
           ],
         ),
       ),
@@ -950,8 +1221,18 @@ class _SkillsSection extends StatelessWidget {
   ];
 
   static const _tools = [
-    'Android Studio', 'VS Code', 'Git & GitHub', 'Postman',
-    'Figma', 'REST APIs', 'Riverpod', 'Provider', 'GetX', 'Hive',
+    'Android Studio',
+    'VS Code',
+    'Git & GitHub',
+    'Postman',
+    'Jira',
+    'AI-Assisted Development',
+    'Figma',
+    'REST APIs',
+    'Riverpod',
+    'Provider',
+    'GetX',
+    'Hive',
   ];
 
   @override
@@ -962,7 +1243,10 @@ class _SkillsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionHeader(title: 'Skills', subtitle: 'My core proficiencies'),
+          const _SectionHeader(
+            title: 'Skills',
+            subtitle: 'My core proficiencies',
+          ),
           const SizedBox(height: 48),
           isDesktop
               ? Row(
@@ -994,9 +1278,18 @@ class _SkillBarsColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Technical Skills', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+        Text(
+          'Technical Skills',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
         const SizedBox(height: 24),
-        ...skills.map((s) => _AnimatedSkillBar(label: s.$1, percentage: s.$2, color: s.$3)),
+        ...skills.map(
+          (s) => _AnimatedSkillBar(label: s.$1, percentage: s.$2, color: s.$3),
+        ),
       ],
     );
   }
@@ -1006,25 +1299,38 @@ class _AnimatedSkillBar extends StatefulWidget {
   final String label;
   final double percentage;
   final Color color;
-  const _AnimatedSkillBar({required this.label, required this.percentage, required this.color});
+  const _AnimatedSkillBar({
+    required this.label,
+    required this.percentage,
+    required this.color,
+  });
   @override
   State<_AnimatedSkillBar> createState() => _AnimatedSkillBarState();
 }
 
-class _AnimatedSkillBarState extends State<_AnimatedSkillBar> with SingleTickerProviderStateMixin {
+class _AnimatedSkillBarState extends State<_AnimatedSkillBar>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
   late final Animation<double> _anim;
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200));
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    );
     _anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOut);
     Future.delayed(const Duration(milliseconds: 300), () {
       if (mounted) _ctrl.forward();
     });
   }
+
   @override
-  void dispose() { _ctrl.dispose(); super.dispose(); }
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -1035,12 +1341,22 @@ class _AnimatedSkillBarState extends State<_AnimatedSkillBar> with SingleTickerP
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.label, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
+              Text(
+                widget.label,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
               AnimatedBuilder(
                 animation: _anim,
                 builder: (_, __) => Text(
                   '${(widget.percentage * _anim.value * 100).toInt()}%',
-                  style: TextStyle(color: widget.color, fontWeight: FontWeight.bold, fontSize: 13),
+                  style: TextStyle(
+                    color: widget.color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
               ),
             ],
@@ -1072,7 +1388,14 @@ class _ToolsColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Tools & Technologies', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+        Text(
+          'Tools & Technologies',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
         const SizedBox(height: 24),
         Wrap(
           spacing: 10,
@@ -1106,8 +1429,14 @@ class _TechChipState extends State<_TechChip> {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: _hovered ? _accent : Colors.white12),
         ),
-        child: Text(widget.label,
-            style: TextStyle(color: _hovered ? _accent : Colors.grey[300], fontSize: 13, fontWeight: FontWeight.w500)),
+        child: Text(
+          widget.label,
+          style: TextStyle(
+            color: _hovered ? _accent : Colors.grey[300],
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }
@@ -1154,11 +1483,19 @@ class _EducationColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(children: [
-          const Icon(Icons.school_outlined, color: _accent),
-          const SizedBox(width: 10),
-          Text('Education', style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold)),
-        ]),
+        Row(
+          children: [
+            const Icon(Icons.school_outlined, color: _accent),
+            const SizedBox(width: 10),
+            Text(
+              'Education',
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
         const SizedBox(height: 24),
         _TimelineItem(
           title: 'Bachelor of Technology in Computer Science',
@@ -1184,17 +1521,26 @@ class _ExperienceColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(children: [
-          const Icon(Icons.work_outline, color: _accentAlt),
-          const SizedBox(width: 10),
-          Text('Experience', style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold)),
-        ]),
+        Row(
+          children: [
+            const Icon(Icons.work_outline, color: _accentAlt),
+            const SizedBox(width: 10),
+            Text(
+              'Experience',
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
         const SizedBox(height: 24),
         _TimelineItem(
           title: 'Software Engineer Intern',
           subtitle: 'Sentient Digital Pvt. Ltd., Indore, MP',
           date: 'Mar 2025 – Jun 2025',
-          detail: '• Built field-force management apps using Flutter & REST APIs\n'
+          detail:
+              '• Built field-force management apps using Flutter & REST APIs\n'
               '• Implemented state management with Riverpod\n'
               '• Integrated real-time location tracking\n'
               '• Designing, coding, testing & documenting new features in agile teams',
@@ -1235,10 +1581,21 @@ class _TimelineItem extends StatelessWidget {
                   color: isActive ? color : Colors.transparent,
                   shape: BoxShape.circle,
                   border: Border.all(color: color, width: 2),
-                  boxShadow: isActive ? [BoxShadow(color: color.withValues(alpha: 0.4), blurRadius: 8)] : [],
+                  boxShadow: isActive
+                      ? [
+                          BoxShadow(
+                            color: color.withValues(alpha: 0.4),
+                            blurRadius: 8,
+                          ),
+                        ]
+                      : [],
                 ),
               ),
-              Container(width: 2, height: 100, color: color.withValues(alpha: 0.3)),
+              Container(
+                width: 2,
+                height: 100,
+                color: color.withValues(alpha: 0.3),
+              ),
             ],
           ),
           const SizedBox(width: 20),
@@ -1249,25 +1606,61 @@ class _TimelineItem extends StatelessWidget {
                 color: _card,
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: _cardBorder),
-                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 10)],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.2),
+                    blurRadius: 10,
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text(date, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.bold)),
+                    child: Text(
+                      date,
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 10),
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(subtitle, style: TextStyle(color: Colors.grey[500], fontSize: 13, fontStyle: FontStyle.italic)),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 13,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
                   const SizedBox(height: 10),
-                  Text(detail, style: TextStyle(color: Colors.grey[400], fontSize: 13, height: 1.6)),
+                  Text(
+                    detail,
+                    style: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: 13,
+                      height: 1.6,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -1292,17 +1685,26 @@ class _ProjectsSection extends StatelessWidget {
         children: [
           const _SectionHeader(title: 'Projects', subtitle: 'Some highlights'),
           const SizedBox(height: 48),
-          LayoutBuilder(builder: (ctx, constraints) {
-            final cols = constraints.maxWidth > 900 ? 3 : constraints.maxWidth > 600 ? 2 : 1;
-            return Wrap(
-              spacing: 24,
-              runSpacing: 24,
-              children: myProjects.map((p) {
-                final width = (constraints.maxWidth - (cols - 1) * 24) / cols;
-                return SizedBox(width: width, child: _ProjectCard(project: p, onTryNow: onTryNow));
-              }).toList(),
-            );
-          }),
+          LayoutBuilder(
+            builder: (ctx, constraints) {
+              final cols = constraints.maxWidth > 900
+                  ? 3
+                  : constraints.maxWidth > 600
+                  ? 2
+                  : 1;
+              return Wrap(
+                spacing: 24,
+                runSpacing: 24,
+                children: myProjects.map((p) {
+                  final width = (constraints.maxWidth - (cols - 1) * 24) / cols;
+                  return SizedBox(
+                    width: width,
+                    child: _ProjectCard(project: p, onTryNow: onTryNow),
+                  );
+                }).toList(),
+              );
+            },
+          ),
         ],
       ),
     );
@@ -1330,14 +1732,18 @@ class _ProjectCardState extends State<_ProjectCard> {
         onTap: () => Navigator.pushNamed(context, '/project/${p.id}'),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
-          transform: _hovered ? (Matrix4.identity()..translate(0.0, -6.0)) : Matrix4.identity(),
+          transform: _hovered
+              ? (Matrix4.identity()..translate(0.0, -6.0))
+              : Matrix4.identity(),
           decoration: BoxDecoration(
             color: _card,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: _hovered ? _accent : _cardBorder),
             boxShadow: [
               BoxShadow(
-                color: _hovered ? _accent.withValues(alpha: 0.2) : Colors.black.withValues(alpha: 0.3),
+                color: _hovered
+                    ? _accent.withValues(alpha: 0.2)
+                    : Colors.black.withValues(alpha: 0.3),
                 blurRadius: _hovered ? 24 : 8,
                 offset: const Offset(0, 8),
               ),
@@ -1348,7 +1754,9 @@ class _ProjectCardState extends State<_ProjectCard> {
             children: [
               // Image with overlay
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(19)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(19),
+                ),
                 child: Stack(
                   children: [
                     Image.asset(
@@ -1359,7 +1767,13 @@ class _ProjectCardState extends State<_ProjectCard> {
                       errorBuilder: (_, __, ___) => Container(
                         height: 200,
                         color: _cardBorder,
-                        child: const Center(child: Icon(Icons.image_not_supported, color: Colors.grey, size: 40)),
+                        child: const Center(
+                          child: Icon(
+                            Icons.image_not_supported,
+                            color: Colors.grey,
+                            size: 40,
+                          ),
+                        ),
                       ),
                     ),
                     // Category badge
@@ -1367,13 +1781,25 @@ class _ProjectCardState extends State<_ProjectCard> {
                       top: 12,
                       left: 12,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black.withValues(alpha: 0.7),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: _accent.withValues(alpha: 0.5)),
+                          border: Border.all(
+                            color: _accent.withValues(alpha: 0.5),
+                          ),
                         ),
-                        child: Text(p.category, style: const TextStyle(color: _accent, fontSize: 11, fontWeight: FontWeight.bold)),
+                        child: Text(
+                          p.category,
+                          style: const TextStyle(
+                            color: _accent,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                     // Hover overlay
@@ -1382,8 +1808,14 @@ class _ProjectCardState extends State<_ProjectCard> {
                         child: Container(
                           color: Colors.black.withValues(alpha: 0.5),
                           child: const Center(
-                            child: Text('View Details →',
-                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                            child: Text(
+                              'View Details →',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -1395,24 +1827,52 @@ class _ProjectCardState extends State<_ProjectCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(p.title, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text(
+                      p.title,
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 8),
-                    Text(p.description,
-                        style: TextStyle(color: Colors.grey[400], fontSize: 13, height: 1.5),
-                        maxLines: 2, overflow: TextOverflow.ellipsis),
+                    Text(
+                      p.description,
+                      style: TextStyle(
+                        color: Colors.grey[400],
+                        fontSize: 13,
+                        height: 1.5,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     const SizedBox(height: 14),
                     // Tech chips
                     Wrap(
                       spacing: 6,
                       runSpacing: 6,
-                      children: p.techStack.take(3).map((t) => Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: _accentGlow,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(t, style: const TextStyle(color: _accent, fontSize: 11, fontWeight: FontWeight.w500)),
-                      )).toList(),
+                      children: p.techStack
+                          .take(3)
+                          .map(
+                            (t) => Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: _accentGlow,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                t,
+                                style: const TextStyle(
+                                  color: _accent,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
                     const SizedBox(height: 16),
                     // Action buttons
@@ -1422,7 +1882,10 @@ class _ProjectCardState extends State<_ProjectCard> {
                           child: _SmallGradientBtn(
                             label: 'View Details',
                             icon: Icons.arrow_forward_rounded,
-                            onTap: () => Navigator.pushNamed(context, '/project/${p.id}'),
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              '/project/${p.id}',
+                            ),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -1454,7 +1917,11 @@ class _SmallGradientBtn extends StatelessWidget {
   final String label;
   final IconData icon;
   final VoidCallback onTap;
-  const _SmallGradientBtn({required this.label, required this.icon, required this.onTap});
+  const _SmallGradientBtn({
+    required this.label,
+    required this.icon,
+    required this.onTap,
+  });
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -1472,7 +1939,14 @@ class _SmallGradientBtn extends StatelessWidget {
             children: [
               Icon(icon, size: 16, color: Colors.white),
               const SizedBox(width: 6),
-              Text(label, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+              Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
             ],
           ),
         ),
@@ -1485,7 +1959,11 @@ class _IconOutlineBtn extends StatefulWidget {
   final IconData icon;
   final String tooltip;
   final VoidCallback onTap;
-  const _IconOutlineBtn({required this.icon, required this.tooltip, required this.onTap});
+  const _IconOutlineBtn({
+    required this.icon,
+    required this.tooltip,
+    required this.onTap,
+  });
   @override
   State<_IconOutlineBtn> createState() => _IconOutlineBtnState();
 }
@@ -1510,7 +1988,11 @@ class _IconOutlineBtnState extends State<_IconOutlineBtn> {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: _hovered ? _accent : _cardBorder),
             ),
-            child: Icon(widget.icon, size: 16, color: _hovered ? _accent : Colors.grey),
+            child: Icon(
+              widget.icon,
+              size: 16,
+              color: _hovered ? _accent : Colors.grey,
+            ),
           ),
         ),
       ),
@@ -1528,16 +2010,31 @@ class _ContactSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionHeader(title: 'Contact', subtitle: "Let's work together"),
+          const _SectionHeader(
+            title: 'Contact',
+            subtitle: "Let's work together",
+          ),
           const SizedBox(height: 48),
           // Contact info cards
           Wrap(
             spacing: 20,
             runSpacing: 20,
             children: [
-              _ContactInfoCard(icon: Icons.location_on_outlined, title: 'Location', value: 'Bhopal, MP, India'),
-              _ContactInfoCard(icon: Icons.email_outlined, title: 'Email', value: 'lowanshiansh@gmail.com'),
-              _ContactInfoCard(icon: Icons.phone_android_outlined, title: 'Phone', value: '+91 7828479491'),
+              _ContactInfoCard(
+                icon: Icons.location_on_outlined,
+                title: 'Location',
+                value: 'Mumbai, MH, India',
+              ),
+              _ContactInfoCard(
+                icon: Icons.email_outlined,
+                title: 'Email',
+                value: 'lowanshiansh@gmail.com',
+              ),
+              _ContactInfoCard(
+                icon: Icons.phone_android_outlined,
+                title: 'Phone',
+                value: '+91 7828479491',
+              ),
             ],
           ),
           const SizedBox(height: 48),
@@ -1551,7 +2048,11 @@ class _ContactSection extends StatelessWidget {
 class _ContactInfoCard extends StatefulWidget {
   final IconData icon;
   final String title, value;
-  const _ContactInfoCard({required this.icon, required this.title, required this.value});
+  const _ContactInfoCard({
+    required this.icon,
+    required this.title,
+    required this.value,
+  });
   @override
   State<_ContactInfoCard> createState() => _ContactInfoCardState();
 }
@@ -1571,7 +2072,14 @@ class _ContactInfoCardState extends State<_ContactInfoCard> {
           color: _card,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: _hovered ? _accent : _cardBorder),
-          boxShadow: _hovered ? [BoxShadow(color: _accent.withValues(alpha: 0.2), blurRadius: 16)] : [],
+          boxShadow: _hovered
+              ? [
+                  BoxShadow(
+                    color: _accent.withValues(alpha: 0.2),
+                    blurRadius: 16,
+                  ),
+                ]
+              : [],
         ),
         child: Column(
           children: [
@@ -1584,9 +2092,16 @@ class _ContactInfoCardState extends State<_ContactInfoCard> {
               child: Icon(widget.icon, color: _accent, size: 24),
             ),
             const SizedBox(height: 12),
-            Text(widget.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+            Text(
+              widget.title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            ),
             const SizedBox(height: 4),
-            Text(widget.value, style: TextStyle(color: Colors.grey[400], fontSize: 12), textAlign: TextAlign.center),
+            Text(
+              widget.value,
+              style: TextStyle(color: Colors.grey[400], fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),
@@ -1594,29 +2109,46 @@ class _ContactInfoCardState extends State<_ContactInfoCard> {
   }
 }
 
-
 class _ContactSideInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Let's Connect", style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(
+          "Let's Connect",
+          style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 16),
         Text(
           "I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.",
           style: TextStyle(color: Colors.grey[400], height: 1.7),
         ),
         const SizedBox(height: 32),
-        Text('Follow me on', style: TextStyle(color: Colors.grey[500], fontSize: 13)),
+        Text(
+          'Follow me on',
+          style: TextStyle(color: Colors.grey[500], fontSize: 13),
+        ),
         const SizedBox(height: 16),
         Row(
           children: [
-            _SocialLargeBtn(icon: FontAwesomeIcons.github, label: 'GitHub', url: 'https://github.com/ansh-lowanshi'),
+            _SocialLargeBtn(
+              icon: FontAwesomeIcons.github,
+              label: 'GitHub',
+              url: 'https://github.com/ansh-lowanshi',
+            ),
             const SizedBox(width: 12),
-            _SocialLargeBtn(icon: FontAwesomeIcons.linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/ansh-lowanshi/'),
+            _SocialLargeBtn(
+              icon: FontAwesomeIcons.linkedin,
+              label: 'LinkedIn',
+              url: 'https://www.linkedin.com/in/ansh-lowanshi/',
+            ),
             const SizedBox(width: 12),
-            _SocialLargeBtn(icon: FontAwesomeIcons.instagram, label: 'Instagram', url: 'https://www.instagram.com/ansh_lowanshi/'),
+            _SocialLargeBtn(
+              icon: FontAwesomeIcons.instagram,
+              label: 'Instagram',
+              url: '',
+            ),
           ],
         ),
       ],
@@ -1627,7 +2159,11 @@ class _ContactSideInfo extends StatelessWidget {
 class _SocialLargeBtn extends StatefulWidget {
   final dynamic icon;
   final String label, url;
-  const _SocialLargeBtn({required this.icon, required this.label, required this.url});
+  const _SocialLargeBtn({
+    required this.icon,
+    required this.label,
+    required this.url,
+  });
   @override
   State<_SocialLargeBtn> createState() => _SocialLargeBtnState();
 }
@@ -1652,9 +2188,19 @@ class _SocialLargeBtnState extends State<_SocialLargeBtn> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              FaIcon(widget.icon, size: 14, color: _hovered ? _accent : Colors.grey),
+              FaIcon(
+                widget.icon,
+                size: 14,
+                color: _hovered ? _accent : Colors.grey,
+              ),
               const SizedBox(width: 8),
-              Text(widget.label, style: TextStyle(color: _hovered ? _accent : Colors.grey, fontSize: 12)),
+              Text(
+                widget.label,
+                style: TextStyle(
+                  color: _hovered ? _accent : Colors.grey,
+                  fontSize: 12,
+                ),
+              ),
             ],
           ),
         ),
@@ -1678,27 +2224,52 @@ class _Footer extends StatelessWidget {
       child: Column(
         children: [
           ShaderMask(
-            shaderCallback: (b) => const LinearGradient(colors: [_accent, _accentAlt]).createShader(b),
-            child: Text('Ansh Lowanshi', style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+            shaderCallback: (b) => const LinearGradient(
+              colors: [_accent, _accentAlt],
+            ).createShader(b),
+            child: Text(
+              'Ansh Lowanshi',
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
           ),
           const SizedBox(height: 8),
-          Text('Flutter Developer & Software Engineer',
-              style: TextStyle(color: Colors.grey[500], fontSize: 13)),
+          Text(
+            'Flutter Developer & Software Engineer',
+            style: TextStyle(color: Colors.grey[500], fontSize: 13),
+          ),
           const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _SocialBtn(icon: FontAwesomeIcons.github, url: 'https://github.com/ansh-lowanshi'),
-              _SocialBtn(icon: FontAwesomeIcons.linkedin, url: 'https://www.linkedin.com/in/ansh-lowanshi/'),
-              _SocialBtn(icon: FontAwesomeIcons.instagram, url: 'https://www.instagram.com/ansh_lowanshi/'),
-              _SocialBtn(icon: FontAwesomeIcons.envelope, url: 'mailto:lowanshiansh@gmail.com'),
+              _SocialBtn(
+                icon: FontAwesomeIcons.github,
+                url: 'https://github.com/ansh-lowanshi',
+              ),
+              _SocialBtn(
+                icon: FontAwesomeIcons.linkedin,
+                url: 'https://www.linkedin.com/in/ansh-lowanshi/',
+              ),
+              _SocialBtn(icon: FontAwesomeIcons.instagram, url: ''),
+              _SocialBtn(
+                icon: FontAwesomeIcons.envelope,
+                url: 'mailto:lowanshiansh@gmail.com',
+              ),
             ],
           ),
           const SizedBox(height: 20),
-          Text('© 2026 Ansh Lowanshi. All Rights Reserved.',
-              style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+          Text(
+            '© 2026 Ansh Lowanshi. All Rights Reserved.',
+            style: TextStyle(color: Colors.grey[600], fontSize: 12),
+          ),
           const SizedBox(height: 4),
-          Text('Built with Flutter ❤️', style: TextStyle(color: Colors.grey[700], fontSize: 11)),
+          Text(
+            'Built with Flutter ❤️',
+            style: TextStyle(color: Colors.grey[700], fontSize: 11),
+          ),
         ],
       ),
     );
@@ -1714,7 +2285,8 @@ class _AppRunnerOverlay extends StatefulWidget {
   State<_AppRunnerOverlay> createState() => _AppRunnerOverlayState();
 }
 
-class _AppRunnerOverlayState extends State<_AppRunnerOverlay> with SingleTickerProviderStateMixin {
+class _AppRunnerOverlayState extends State<_AppRunnerOverlay>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _ctrl;
   late final Animation<double> _anim;
   final _registered = <String>{};
@@ -1722,7 +2294,10 @@ class _AppRunnerOverlayState extends State<_AppRunnerOverlay> with SingleTickerP
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
     _anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOut);
     _ctrl.forward();
     _registerIframe();
@@ -1746,17 +2321,17 @@ class _AppRunnerOverlayState extends State<_AppRunnerOverlay> with SingleTickerP
   }
 
   @override
-  void dispose() { _ctrl.dispose(); super.dispose(); }
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final p = widget.project;
     return AnimatedBuilder(
       animation: _anim,
-      builder: (_, child) => Opacity(
-        opacity: _anim.value,
-        child: child,
-      ),
+      builder: (_, child) => Opacity(opacity: _anim.value, child: child),
       child: Container(
         color: Colors.black.withValues(alpha: 0.85),
         child: Center(
@@ -1767,52 +2342,110 @@ class _AppRunnerOverlayState extends State<_AppRunnerOverlay> with SingleTickerP
               color: _card,
               borderRadius: BorderRadius.circular(28),
               border: Border.all(color: _accent, width: 1.5),
-              boxShadow: [BoxShadow(color: _accent.withValues(alpha: 0.3), blurRadius: 40)],
+              boxShadow: [
+                BoxShadow(
+                  color: _accent.withValues(alpha: 0.3),
+                  blurRadius: 40,
+                ),
+              ],
             ),
             child: Column(
               children: [
                 // Header
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 14,
+                  ),
                   decoration: BoxDecoration(
                     color: _sidebar,
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(27)),
-                    border: const Border(bottom: BorderSide(color: _cardBorder)),
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(27),
+                    ),
+                    border: const Border(
+                      bottom: BorderSide(color: _cardBorder),
+                    ),
                   ),
                   child: Row(
                     children: [
                       // Traffic light dots
-                      Row(children: [
-                        Container(width: 12, height: 12, decoration: const BoxDecoration(color: Color(0xFFFF5F57), shape: BoxShape.circle)),
-                        const SizedBox(width: 8),
-                        Container(width: 12, height: 12, decoration: const BoxDecoration(color: Color(0xFFFFBD2E), shape: BoxShape.circle)),
-                        const SizedBox(width: 8),
-                        Container(width: 12, height: 12, decoration: const BoxDecoration(color: Color(0xFF28CA41), shape: BoxShape.circle)),
-                      ]),
+                      Row(
+                        children: [
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFFF5F57),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFFFBD2E),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF28CA41),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(width: 20),
                       // URL bar
                       Expanded(
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 6,
+                          ),
                           decoration: BoxDecoration(
                             color: _bg,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.lock_outline, size: 12, color: Colors.grey),
+                              const Icon(
+                                Icons.lock_outline,
+                                size: 12,
+                                color: Colors.grey,
+                              ),
                               const SizedBox(width: 6),
-                              Text(p.webUrl, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+                              Text(
+                                p.webUrl,
+                                style: TextStyle(
+                                  color: Colors.grey[500],
+                                  fontSize: 12,
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
                       const SizedBox(width: 16),
-                      Text(p.title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.white)),
+                      Text(
+                        p.title,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                       const SizedBox(width: 16),
                       // External link
                       IconButton(
-                        icon: const Icon(Icons.open_in_new, color: Colors.grey, size: 18),
+                        icon: const Icon(
+                          Icons.open_in_new,
+                          color: Colors.grey,
+                          size: 18,
+                        ),
                         tooltip: 'Open in new tab',
                         onPressed: () => html.window.open(p.webUrl, '_blank'),
                       ),
@@ -1827,7 +2460,9 @@ class _AppRunnerOverlayState extends State<_AppRunnerOverlay> with SingleTickerP
                 // iFrame
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(27)),
+                    borderRadius: const BorderRadius.vertical(
+                      bottom: Radius.circular(27),
+                    ),
                     child: HtmlElementView(viewType: 'iframe-${p.id}'),
                   ),
                 ),
@@ -1866,13 +2501,28 @@ class _SectionHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(subtitle.toUpperCase(),
-            style: TextStyle(color: _accent, fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 3)),
+        Text(
+          subtitle.toUpperCase(),
+          style: TextStyle(
+            color: _accent,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 3,
+          ),
+        ),
         const SizedBox(height: 8),
         ShaderMask(
-          shaderCallback: (bounds) => const LinearGradient(colors: [Colors.white, Color(0xFF94A3B8)]).createShader(bounds),
-          child: Text(title,
-              style: GoogleFonts.poppins(fontSize: 36, fontWeight: FontWeight.bold, color: Colors.white)),
+          shaderCallback: (bounds) => const LinearGradient(
+            colors: [Colors.white, Color(0xFF94A3B8)],
+          ).createShader(bounds),
+          child: Text(
+            title,
+            style: GoogleFonts.poppins(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         Container(
@@ -1907,85 +2557,100 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
       backgroundColor: _bg,
       body: CustomScrollView(
         slivers: [
-              // Simple pinned AppBar — no hero image
-              SliverAppBar(
-                pinned: true,
-                backgroundColor: _sidebar,
-                elevation: 0,
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new, color: _accent),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                title: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: _accentGlow,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(p.category,
-                          style: const TextStyle(
-                              color: _accent, fontSize: 11, fontWeight: FontWeight.bold)),
+          // Simple pinned AppBar — no hero image
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: _sidebar,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new, color: _accent),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: _accentGlow,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    p.category,
+                    style: const TextStyle(
+                      color: _accent,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(width: 12),
-                    Flexible(
-                      child: Text(p.title,
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.bold, color: Colors.white),
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              // ── Main content: screenshots left 60%, about right 40% (desktop) ──
-              SliverToBoxAdapter(
-                child: isDesktop
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 40),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(width: 12),
+                Flexible(
+                  child: Text(
+                    p.title,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // ── Main content: screenshots left 60%, about right 40% (desktop) ──
+          SliverToBoxAdapter(
+            child: isDesktop
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 48,
+                      vertical: 40,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Left 60% — screenshot gallery
+                        Expanded(
+                          flex: 6,
+                          child: _ScreenshotGallerySection(project: p),
+                        ),
+                        const SizedBox(width: 40),
+                        // Right 40% — about + sidebar
+                        Expanded(
+                          flex: 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              _ProjectDetailContent(project: p),
+                              const SizedBox(height: 36),
+                              _ProjectSidebar(project: p),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Column(
+                    children: [
+                      _ScreenshotGallerySection(project: p),
+                      Padding(
+                        padding: const EdgeInsets.all(28),
+                        child: Column(
                           children: [
-                            // Left 60% — screenshot gallery
-                            Expanded(
-                              flex: 6,
-                              child: _ScreenshotGallerySection(project: p),
-                            ),
-                            const SizedBox(width: 40),
-                            // Right 40% — about + sidebar
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  _ProjectDetailContent(project: p),
-                                  const SizedBox(height: 36),
-                                  _ProjectSidebar(project: p),
-                                ],
-                              ),
-                            ),
+                            _ProjectSidebar(project: p),
+                            const SizedBox(height: 32),
+                            _ProjectDetailContent(project: p),
                           ],
                         ),
-                      )
-                    : Column(
-                        children: [
-                          _ScreenshotGallerySection(project: p),
-                          Padding(
-                            padding: const EdgeInsets.all(28),
-                            child: Column(
-                              children: [
-                                _ProjectSidebar(project: p),
-                                const SizedBox(height: 32),
-                                _ProjectDetailContent(project: p),
-                              ],
-                            ),
-                          ),
-                        ],
                       ),
-              ),
-            ],
+                    ],
+                  ),
           ),
-        );
+        ],
+      ),
+    );
   }
 }
 
@@ -1994,7 +2659,8 @@ class _ScreenshotGallerySection extends StatefulWidget {
   final Project project;
   const _ScreenshotGallerySection({required this.project});
   @override
-  State<_ScreenshotGallerySection> createState() => _ScreenshotGallerySectionState();
+  State<_ScreenshotGallerySection> createState() =>
+      _ScreenshotGallerySectionState();
 }
 
 class _ScreenshotGallerySectionState extends State<_ScreenshotGallerySection> {
@@ -2018,28 +2684,44 @@ class _ScreenshotGallerySectionState extends State<_ScreenshotGallerySection> {
           Row(
             children: [
               ShaderMask(
-                shaderCallback: (b) =>
-                    const LinearGradient(colors: [_accent, _accentAlt]).createShader(b),
-                child: Text('Screenshots',
-                    style: GoogleFonts.poppins(
-                        fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+                shaderCallback: (b) => const LinearGradient(
+                  colors: [_accent, _accentAlt],
+                ).createShader(b),
+                child: Text(
+                  'Screenshots',
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
               ),
               const SizedBox(width: 10),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: _accentGlow,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text('${shots.length} images',
-                    style: const TextStyle(
-                        color: _accent, fontSize: 12, fontWeight: FontWeight.w500)),
+                child: Text(
+                  '${shots.length} images',
+                  style: const TextStyle(
+                    color: _accent,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 6),
-          Text('${_selected + 1} of ${shots.length}',
-              style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+          Text(
+            '${_selected + 1} of ${shots.length}',
+            style: TextStyle(color: Colors.grey[600], fontSize: 12),
+          ),
           const SizedBox(height: 16),
           // Single image viewer with prev/next buttons
           Stack(
@@ -2057,7 +2739,13 @@ class _ScreenshotGallerySectionState extends State<_ScreenshotGallerySection> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: _accent, width: 1.5),
-                      boxShadow: [BoxShadow(color: _accent.withValues(alpha: 0.25), blurRadius: 24, spreadRadius: 2)],
+                      boxShadow: [
+                        BoxShadow(
+                          color: _accent.withValues(alpha: 0.25),
+                          blurRadius: 24,
+                          spreadRadius: 2,
+                        ),
+                      ],
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -2070,8 +2758,12 @@ class _ScreenshotGallerySectionState extends State<_ScreenshotGallerySection> {
                           height: 460,
                           color: _card,
                           child: const Center(
-                              child: Icon(Icons.image_not_supported,
-                                  color: Colors.grey, size: 48)),
+                            child: Icon(
+                              Icons.image_not_supported,
+                              color: Colors.grey,
+                              size: 48,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -2115,7 +2807,12 @@ class _ScreenshotGallerySectionState extends State<_ScreenshotGallerySection> {
                     color: isSelected ? _accent : Colors.white24,
                     borderRadius: BorderRadius.circular(4),
                     boxShadow: isSelected
-                        ? [BoxShadow(color: _accent.withValues(alpha: 0.5), blurRadius: 6)]
+                        ? [
+                            BoxShadow(
+                              color: _accent.withValues(alpha: 0.5),
+                              blurRadius: 6,
+                            ),
+                          ]
                         : [],
                   ),
                 ),
@@ -2139,15 +2836,23 @@ class _ProjectDetailContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ShaderMask(
-          shaderCallback: (b) =>
-              const LinearGradient(colors: [_accent, _accentAlt]).createShader(b),
-          child: Text('About This Project',
-              style: GoogleFonts.poppins(
-                  fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+          shaderCallback: (b) => const LinearGradient(
+            colors: [_accent, _accentAlt],
+          ).createShader(b),
+          child: Text(
+            'About This Project',
+            style: GoogleFonts.poppins(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
         const SizedBox(height: 20),
-        Text(project.longDescription,
-            style: TextStyle(color: Colors.grey[300], height: 1.85, fontSize: 15)),
+        Text(
+          project.longDescription,
+          style: TextStyle(color: Colors.grey[300], height: 1.85, fontSize: 15),
+        ),
       ],
     );
   }
@@ -2175,14 +2880,26 @@ class _ProjectSidebar extends StatelessWidget {
                   colors: [Color(0xFF34D399), Color(0xFF059669)],
                 ),
                 borderRadius: BorderRadius.circular(14),
-                boxShadow: [BoxShadow(color: const Color(0xFF34D399).withValues(alpha: 0.4), blurRadius: 20)],
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF34D399).withValues(alpha: 0.4),
+                    blurRadius: 20,
+                  ),
+                ],
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.android, color: Colors.white, size: 22),
                   SizedBox(width: 10),
-                  Text('Download APK', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(
+                    'Download APK',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -2204,9 +2921,19 @@ class _ProjectSidebar extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FaIcon(FontAwesomeIcons.github, color: Colors.white54, size: 18),
+                  FaIcon(
+                    FontAwesomeIcons.github,
+                    color: Colors.white54,
+                    size: 18,
+                  ),
                   SizedBox(width: 10),
-                  Text('View on GitHub', style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold)),
+                  Text(
+                    'View on GitHub',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -2224,24 +2951,50 @@ class _ProjectSidebar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Project Info', style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+              Text(
+                'Project Info',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
               const SizedBox(height: 20),
               _InfoRow(label: 'Category', value: p.category),
               const Divider(color: _cardBorder, height: 24),
-              Text('Tech Stack', style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+              Text(
+                'Tech Stack',
+                style: TextStyle(color: Colors.grey[500], fontSize: 12),
+              ),
               const SizedBox(height: 10),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: p.techStack.map((t) => Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: _accentGlow,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: _accent.withValues(alpha: 0.4)),
-                  ),
-                  child: Text(t, style: const TextStyle(color: _accent, fontSize: 12, fontWeight: FontWeight.w500)),
-                )).toList(),
+                children: p.techStack
+                    .map(
+                      (t) => Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _accentGlow,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: _accent.withValues(alpha: 0.4),
+                          ),
+                        ),
+                        child: Text(
+                          t,
+                          style: const TextStyle(
+                            color: _accent,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
               ),
             ],
           ),
@@ -2260,7 +3013,14 @@ class _InfoRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(label, style: TextStyle(color: Colors.grey[500], fontSize: 13)),
-        Text(value, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500)),
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ],
     );
   }
@@ -2271,7 +3031,11 @@ class _NavButton extends StatefulWidget {
   final IconData icon;
   final bool enabled;
   final VoidCallback onTap;
-  const _NavButton({required this.icon, required this.enabled, required this.onTap});
+  const _NavButton({
+    required this.icon,
+    required this.enabled,
+    required this.onTap,
+  });
 
   @override
   State<_NavButton> createState() => _NavButtonState();
@@ -2283,7 +3047,9 @@ class _NavButtonState extends State<_NavButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      cursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      cursor: widget.enabled
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
       child: GestureDetector(
@@ -2302,7 +3068,12 @@ class _NavButtonState extends State<_NavButton> {
               width: 1.5,
             ),
             boxShadow: widget.enabled
-                ? [BoxShadow(color: _accent.withValues(alpha: 0.3), blurRadius: 12)]
+                ? [
+                    BoxShadow(
+                      color: _accent.withValues(alpha: 0.3),
+                      blurRadius: 12,
+                    ),
+                  ]
                 : [],
           ),
           child: Icon(
